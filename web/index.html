@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="scaffolded-by" content="https://github.com/google/stagehand">
+    <title>test</title>
+
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body>
+    <div class="configurationPanel">
+        <label>Attack Value:</label>
+        <input id="attackVal" value="2" />
+        <br/>
+        
+        <label>Evade Value:</label>
+        <input id="evadeVal" value="2" />
+        <br/>
+        
+        <label>Attacker Focusing:</label>
+        <input type="checkbox" name="attackFocus" id="attackFocus">
+        <br/>
+        
+        <label>Defender Focusing:</label>
+        <input type="checkbox" name="evadeFocus" id="evadeFocus">
+        <br/>
+        
+        <label>Attack Range:</label>
+        <input id="rangeSlider" type="range" min="1" max="3" step="1" value="2"/>
+        <br/>
+        
+        <label>Simulation Number:</label>
+        <input id="simulationVal" value="100" />
+        <br/>
+        
+        <button id="attackButton">Attack!</button>
+    </div>
+
+    <script type="application/dart" src="main.dart.js"></script>
+    <script data-pub-inline src="packages/browser/dart.js"></script>
+</body>
+</html>
