@@ -1,11 +1,15 @@
-import "dart:math";
-import "constants.dart";
+part of xwing;
 
 // math.random: used to simulate dice rolls
 final _random = new Random();
 
+// abstract class describing a Die
+abstract class Die {
+  void roll ();
+}
+
 // models one single attack die
-class AttackDie {
+class AttackDie extends Die {
   
     // simulats a single die by containing 8 possible options
     var resultList = [AttackResult.HIT, AttackResult.HIT, AttackResult.HIT, AttackResult.CRITICAL, AttackResult.FOCUS, AttackResult.FOCUS, AttackResult.BLANK, AttackResult.BLANK];
@@ -14,12 +18,12 @@ class AttackDie {
     AttackResult result = AttackResult.BLANK;
   
     // 'rolls' this single die by randomly choosing a result from the resultList
-    AttackResult roll () {
+    void roll () {
         result = resultList[_random.nextInt(resultList.length)];
     }
 }
 
-class EvadeDie {
+class EvadeDie extends Die {
     // simulats a single die by containing 8 possible options
     var resultList = [EvadeResult.EVADE, EvadeResult.EVADE, EvadeResult.EVADE, EvadeResult.FOCUS, EvadeResult.FOCUS, EvadeResult.FOCUS, EvadeResult.BLANK, EvadeResult.BLANK];
     
@@ -27,40 +31,44 @@ class EvadeDie {
     EvadeResult result = EvadeResult.BLANK;
     
     // 'rolls' this single die by randomly choosing a result from the resultList
-    EvadeResult roll () {
+    void roll () {
         result = resultList[_random.nextInt(resultList.length)];
     }
 }
 
-class AttackRoll {
-    // a roll contains a list of dice
-    List<AttackDie> attackDice = new List();
+// abstract class describing a Roll
+abstract class Roll {
+    // all Rolls contain a list of Die
+    List<Die> dice = new List();
     
-    // whether or not the attack is focused; defaults to false
+    // all Rolls can be focused or not, which affects their scoring
     bool isFocused = false;
+    
+    // all Rolls can actually be rolled out which just involves rolling each Die
+    void roll () {
+      for (Die die in dice) {
+          die.roll();
+      }
+    }
+}
+
+class AttackRoll extends Roll {
     
     // constructor
     // param size: number of dice to include in the roll
     // param isfocused: whether or not this attack is from a focusing attacker
     AttackRoll(num size, bool isFocused) {
         for (var i = 0; i < size; i++) {
-            attackDice.add(new AttackDie());
+          dice.add(new AttackDie());
         }
         this.isFocused = isFocused;
-    }
-    
-    // 'rolls' all of the dice in this roll individually
-    void roll () {
-        for (AttackDie die in attackDice) {
-            die.roll();
-        }
     }
     
     // gets the score of the attack (how much damage it would do), or how many hit/criticals there were
     // includes focus results only if the attacker is focusing
     int getScore() {
         int score = 0;
-        for (AttackDie die in attackDice) {
+        for (AttackDie die in dice) {
             if (die.result == AttackResult.HIT || die.result == AttackResult.CRITICAL) {
               score++;
             }
@@ -73,35 +81,22 @@ class AttackRoll {
     
 }
 
-class EvadeRoll {
-    // a roll contains a list of dice
-    List<EvadeDie> evadeDice = new List();
-    
-    // whether or not the defender is focused; defaults to false
-    bool isFocused = false;
-    
+class EvadeRoll extends Roll {
     // constructor
     // param size: number of dice to include in the roll
     // param isfocused: whether or not this defense is from a focusing defender
     EvadeRoll(num size, bool isFocused) {
         for (var i = 0; i < size; i++) {
-            evadeDice.add(new EvadeDie());
+          dice.add(new EvadeDie());
         }
         this.isFocused = isFocused;
-    }
-    
-    // 'rolls' all of the dice in this roll individually
-    void roll () {
-        for (EvadeDie die in evadeDice) {
-            die.roll();
-        }
     }
     
     // gets the score of the defense (how much damage it would cancel), or how many evades there were
     // includes focus results only if the defender is focusing
     int getScore() {
         int score = 0;
-        for (EvadeDie die in evadeDice) {
+        for (EvadeDie die in dice) {
             if (die.result == EvadeResult.EVADE) {
                 score++;
             }
