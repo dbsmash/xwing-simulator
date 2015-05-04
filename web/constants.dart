@@ -1,3 +1,5 @@
+part of xwing;
+
 // all the possible options for an attack die roll
 enum AttackResult {
   HIT,      // directed hit
