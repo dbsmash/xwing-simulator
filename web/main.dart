@@ -13,5 +13,4 @@ part 'simulation_panel.dart';
 void main() {
     reactClient.setClientConfiguration();
     render(SimulationPanel({}), querySelector('#content'));
-    
 }

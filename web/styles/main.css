@@ -7,3 +7,17 @@ html, body {
     padding: 0;
     font-family: 'Roboto', sans-serif;
 }
+
+.cnlabel {
+  width: 140px;
+  text-align: right;
+  margin-right: 12px
+}
+
+.chaser {
+  margin-left: 5px
+}
+
+.cnvalue {
+  width: 100px;
+}

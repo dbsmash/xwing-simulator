@@ -93,30 +93,41 @@ class _SimulationPanel extends Component {
     }
     
     render() {
-        return div({'className':'configurationPanel'},
-            [form({},
-            [label({}, 'Attack Value:'),
-             input({'value':this.state['attackVal'],'onChange': this.onAttackValChange}),
-             br({}),
-             label({}, 'Evade Value:'),
-             input({'value':this.state['evadeVal'],'onChange': this.onEvadeValChange}),
-             br({}),
-             label({}, 'Attacker Focusing:'),
-             input({'type':'checkbox', 'value':this.state['attackFocus'],'onChange': this.onAttackFocusChange}),
-             br({}),
-             label({}, 'Defender Focusing:'),
-             input({'type':'checkbox', 'value':this.state['evadeFocus'],'onChange': this.onEvadeFocusChange}),
-             br({}),
-             label({}, 'Attack Range:'),
-             input({'type':'range', 'min':'1', 'max':'3', 'step':'1', 'value':this.state['attackRange'],'onChange': this.onAttackRangeChange}),
-             br({}),
-             label({}, 'Obstructed:'),
-             input({'type':'checkbox', 'value':this.state['obstructed'],'onChange': this.onObstructedChange}),
-             br({}),
-             label({}, 'Simulation Number::'),
-             input({'value':this.state['simulations'],'onChange': this.onSimulationsChange}),
-             br({})]),
-             button({'onClick':this.onAttackButtonClick}, 'Attack!')]);
+      return div({'className':'configurationPanel container'},
+                [h1({'className':''},'X-Wing Damage Simulator'),
+                  div({'className': 'form-group'}, [
+                  label({'className':'cnlabel'}, 'Attack Value:'),
+                  input({'className':'cnvalue', 'value':this.state['attackVal'],'onChange': this.onAttackValChange})
+                  ]),
+                 div({'className': 'form-group'}, [
+                   label({'className':'cnlabel'}, 'Evade Value:'),
+                   input({'className':'cnvalue', 'value':this.state['evadeVal'],'onChange': this.onEvadeValChange})
+                   ]),
+                 div({'className': 'form-group'}, [
+                   label({'className':'cnlabel'}, 'Attacker Focusing:'),
+                   input({'className':'cnvalue', 'type':'checkbox', 'value':this.state['attackFocus'],'onChange': this.onAttackFocusChange})
+                   ]),
+                 div({'className': 'form-group'}, [
+                   label({'className':'cnlabel'}, 'Defender Focusing:'),
+                   input({'className':'cnvalue', 'type':'checkbox', 'value':this.state['evadeFocus'],'onChange': this.onEvadeFocusChange})
+                   ]),
+                 div({'className': 'form-group'}, [
+                   label({'className':'cnlabel'}, 'Attack Range:'),
+                   input({'className':'cnvalue', 'type':'range', 'min':'1', 'max':'3', 'step':'1', 'value':this.state['attackRange'],'onChange': this.onAttackRangeChange}),
+                   label({'className':'chaser'}, 'range '+this.state['attackRange'])
+                   ]),
+                 div({'className': 'form-group'}, [
+                   label({'className':'cnlabel'}, 'Obstructed:'),
+                   input({'className':'cnvalue', 'type':'checkbox', 'value':this.state['obstructed'],'onChange': this.onObstructedChange})
+                   ]),
+                 div({'className': 'form-group'}, [
+                   label({'className':'cnlabel'}, 'Simulation Number::'),
+                   input({'className':'cnvalue', 'value':this.state['simulations'],'onChange': this.onSimulationsChange})
+                   ]),
+                 div({'className': 'form-group'}, [
+                   label({'className':'cnlabel'}, 'Ready: '),
+                   button({'className':'cnvalue btn btn-primary', 'onClick':this.onAttackButtonClick}, 'Attack!')
+                   ])]);
     }
 }
 
