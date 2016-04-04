@@ -7,6 +7,6 @@ import 'package:xwing/xwing.dart';
 
 // main just wires up the button listeners to start an attack simulation
 void main() {
-    reactClient.setClientConfiguration();
-    render(SimulationPanel({}), querySelector('#content'));
+  reactClient.setClientConfiguration();
+  render(SimulationPanel({}), querySelector('#content'));
 }

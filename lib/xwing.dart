@@ -11,4 +11,3 @@ export 'xwing.dart';
 part 'src/dice.dart';
 part 'src/constants.dart';
 part 'src/simulation_panel.dart';
-
