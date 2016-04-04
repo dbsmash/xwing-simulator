@@ -5681,7 +5681,7 @@ o.cA()
 if(o.c===!0)o.dA()
 n.as()
 q+=this.ci(o,n)}window.alert("Average damage done in the attack: "+H.c(q/x))},
-cd:function(){return $.W.$2(P.p(["className","configurationPanel container"]),[$.ep.$2(P.p(["className",""]),"X-Wing Damage Simulator"),$.W.$2(P.p(["className","form-group"]),[$.X.$2(P.p(["className","cnlabel"]),"Attack Value:"),$.ad.$1(P.p(["className","cnvalue","value",this.f.h(0,"attackVal"),"onChange",this.gdl()]))]),$.W.$2(P.p(["className","form-group"]),[$.X.$2(P.p(["className","cnlabel"]),"Evade Value:"),$.ad.$1(P.p(["className","cnvalue","value",this.f.h(0,"evadeVal"),"onChange",this.gdn()]))]),$.W.$2(P.p(["className","form-group"]),[$.X.$2(P.p(["className","cnlabel"]),"Attacker Focusing:"),$.ad.$1(P.p(["className","cnvalue","type","checkbox","checked",this.f.h(0,"attackFocus"),"onChange",this.gdj()]))]),$.W.$2(P.p(["className","form-group"]),[$.X.$2(P.p(["className","cnlabel"]),"Attacker Target Locked:"),$.ad.$1(P.p(["className","cnvalue","type","checkbox","checked",this.f.h(0,"isTargetLocked"),"onChange",this.gds()]))]),$.W.$2(P.p(["className","form-group"]),[$.X.$2(P.p(["className","cnlabel"]),"Defender Focusing:"),$.ad.$1(P.p(["className","cnvalue","type","checkbox","checked",this.f.h(0,"evadeFocus"),"onChange",this.gdm()]))]),$.W.$2(P.p(["className","form-group"]),[$.X.$2(P.p(["className","cnlabel"]),"Attack Range:"),$.ad.$1(P.p(["className","cnvalue","type","range","min","1","max","3","step","1","value",this.f.h(0,"attackRange"),"onChange",this.gdk()])),$.X.$2(P.p(["className","chaser"]),C.a.E("range ",this.f.h(0,"attackRange")))]),$.W.$2(P.p(["className","form-group"]),[$.X.$2(P.p(["className","cnlabel"]),"Obstructed:"),$.ad.$1(P.p(["className","cnvalue","type","checkbox","checked",this.f.h(0,"obstructed"),"onChange",this.gdq()]))]),$.W.$2(P.p(["className","form-group"]),[$.X.$2(P.p(["className","cnlabel"]),"Simulation Number::"),$.ad.$1(P.p(["className","cnvalue","value",this.f.h(0,"simulations"),"onChange",this.gdr()]))]),$.W.$2(P.p(["className","form-group"]),[$.X.$2(P.p(["className","cnlabel"]),"Ready: "),$.ei.$2(P.p(["className","cnvalue btn btn-primary","onClick",this.gdi()]),"Attack!")])])}},
+cd:function(){return $.W.$2(P.p(["className","configurationPanel container"]),[$.ep.$2(P.p(["className",""]),"X-Wing Damage Simulator"),$.W.$2(P.p(["className","form-group"]),[$.X.$2(P.p(["className","cnlabel"]),"Attack Value:"),$.ad.$1(P.p(["className","cnvalue","value",this.f.h(0,"attackVal"),"title","The attack value of the attacker (red dice)","onChange",this.gdl()]))]),$.W.$2(P.p(["className","form-group"]),[$.X.$2(P.p(["className","cnlabel"]),"Evade Value:"),$.ad.$1(P.p(["className","cnvalue","value",this.f.h(0,"evadeVal"),"title","The defense value of the defender (green dice)","onChange",this.gdn()]))]),$.W.$2(P.p(["className","form-group"]),[$.X.$2(P.p(["className","cnlabel"]),"Attacker Focusing:"),$.ad.$1(P.p(["className","cnvalue","type","checkbox","checked",this.f.h(0,"attackFocus"),"title","Whether or not the attacker is focusing for the attack","onChange",this.gdj()]))]),$.W.$2(P.p(["className","form-group"]),[$.X.$2(P.p(["className","cnlabel"]),"Attacker Target Locked:"),$.ad.$1(P.p(["className","cnvalue","type","checkbox","checked",this.f.h(0,"isTargetLocked"),"title","Whether or not the attacker has a target lock for the attack","onChange",this.gds()]))]),$.W.$2(P.p(["className","form-group"]),[$.X.$2(P.p(["className","cnlabel"]),"Defender Focusing:"),$.ad.$1(P.p(["className","cnvalue","type","checkbox","checked",this.f.h(0,"evadeFocus"),"title","Whether or not the defender is focusing for the attack","onChange",this.gdm()]))]),$.W.$2(P.p(["className","form-group"]),[$.X.$2(P.p(["className","cnlabel"]),"Attack Range:"),$.ad.$1(P.p(["className","cnvalue","type","range","min","1","max","3","step","1","value",this.f.h(0,"attackRange"),"title","The range of the attack","onChange",this.gdk()])),$.X.$2(P.p(["className","chaser"]),C.a.E("range ",this.f.h(0,"attackRange")))]),$.W.$2(P.p(["className","form-group"]),[$.X.$2(P.p(["className","cnlabel"]),"Obstructed:"),$.ad.$1(P.p(["className","cnvalue","type","checkbox","checked",this.f.h(0,"obstructed"),"title","Whether or not the attack is obstructed","onChange",this.gdq()]))]),$.W.$2(P.p(["className","form-group"]),[$.X.$2(P.p(["className","cnlabel"]),"Simulation Number::"),$.ad.$1(P.p(["className","cnvalue","value",this.f.h(0,"simulations"),"title","How many times to simulate this attack","onChange",this.gdr()]))]),$.W.$2(P.p(["className","form-group"]),[$.X.$2(P.p(["className","cnlabel"]),"Ready: "),$.ei.$2(P.p(["className","cnvalue btn btn-primary","title","To start the simulation","onClick",this.gdi()]),"Attack!")])])}},
 jN:{
 "^":"d:0;",
 $0:[function(){var z=new X.iu(null,null,null,null,null,null,P.a2(),null,null)
@@ -5857,35 +5857,6 @@ C.J=function(getTagFallback) {
     hooks.getTag = getTagFallback;
   };
 }
-C.L=function(hooks) {
-  var userAgent = typeof navigator == "object" ? navigator.userAgent : "";
-  if (userAgent.indexOf("Trident/") == -1) return hooks;
-  var getTag = hooks.getTag;
-  var quickMap = {
-    "BeforeUnloadEvent": "Event",
-    "DataTransfer": "Clipboard",
-    "HTMLDDElement": "HTMLElement",
-    "HTMLDTElement": "HTMLElement",
-    "HTMLPhraseElement": "HTMLElement",
-    "Position": "Geoposition"
-  };
-  function getTagIE(o) {
-    var tag = getTag(o);
-    var newTag = quickMap[tag];
-    if (newTag) return newTag;
-    if (tag == "Object") {
-      if (window.DataView && (o instanceof window.DataView)) return "DataView";
-    }
-    return tag;
-  }
-  function prototypeForTagIE(tag) {
-    var constructor = window[tag];
-    if (constructor == null) return null;
-    return constructor.prototype;
-  }
-  hooks.getTag = getTagIE;
-  hooks.prototypeForTag = prototypeForTagIE;
-}
 C.K=function() {
   function typeNameInChrome(o) {
     var constructor = o.constructor;
@@ -5921,6 +5892,35 @@ C.K=function() {
     getUnknownTag: isBrowser ? getUnknownTagGenericBrowser : getUnknownTag,
     prototypeForTag: prototypeForTag,
     discriminator: discriminator };
+}
+C.L=function(hooks) {
+  var userAgent = typeof navigator == "object" ? navigator.userAgent : "";
+  if (userAgent.indexOf("Trident/") == -1) return hooks;
+  var getTag = hooks.getTag;
+  var quickMap = {
+    "BeforeUnloadEvent": "Event",
+    "DataTransfer": "Clipboard",
+    "HTMLDDElement": "HTMLElement",
+    "HTMLDTElement": "HTMLElement",
+    "HTMLPhraseElement": "HTMLElement",
+    "Position": "Geoposition"
+  };
+  function getTagIE(o) {
+    var tag = getTag(o);
+    var newTag = quickMap[tag];
+    if (newTag) return newTag;
+    if (tag == "Object") {
+      if (window.DataView && (o instanceof window.DataView)) return "DataView";
+    }
+    return tag;
+  }
+  function prototypeForTagIE(tag) {
+    var constructor = window[tag];
+    if (constructor == null) return null;
+    return constructor.prototype;
+  }
+  hooks.getTag = getTagIE;
+  hooks.prototypeForTag = prototypeForTagIE;
 }
 C.M=function(hooks) {
   var getTag = hooks.getTag;
