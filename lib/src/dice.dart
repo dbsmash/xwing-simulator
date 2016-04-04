@@ -25,7 +25,7 @@ class AttackDie extends Die {
 
 class EvadeDie extends Die {
     // simulats a single die by containing 8 possible options
-    var resultList = [EvadeResult.EVADE, EvadeResult.EVADE, EvadeResult.EVADE, EvadeResult.FOCUS, EvadeResult.FOCUS, EvadeResult.FOCUS, EvadeResult.BLANK, EvadeResult.BLANK];
+    var resultList = [EvadeResult.EVADE, EvadeResult.EVADE, EvadeResult.EVADE, EvadeResult.FOCUS, EvadeResult.FOCUS, EvadeResult.BLANK, EvadeResult.BLANK, EvadeResult.BLANK];
     
     // defaults to a blank result
     EvadeResult result = EvadeResult.BLANK;
@@ -53,15 +53,18 @@ abstract class Roll {
 }
 
 class AttackRoll extends Roll {
+
+    bool isTargetLocked = false;
     
     // constructor
     // param size: number of dice to include in the roll
     // param isfocused: whether or not this attack is from a focusing attacker
-    AttackRoll(num size, bool isFocused) {
+    AttackRoll(num size, bool isFocused, bool isTargetLocked) {
         for (var i = 0; i < size; i++) {
           dice.add(new AttackDie());
         }
         this.isFocused = isFocused;
+        this.isTargetLocked = isTargetLocked;
     }
     
     // gets the score of the attack (how much damage it would do), or how many hit/criticals there were
@@ -77,6 +80,26 @@ class AttackRoll extends Roll {
             }
         }
         return score;
+    }
+
+    // rerolls blanks (and focus results, if you aren't focused)
+    void targetLockRoll () {
+        for (AttackDie die in dice) {
+            if (die.result == AttackResult.BLANK) {
+              die.roll();
+            }
+            if (die.result == AttackResult.FOCUS && !this.isFocused) {
+                die.roll();
+            }
+        }
+    }
+
+    // attack implementation of roll, which will do a target lock reroll when appropriate
+    void roll () {
+        super.roll();
+        if (this.isTargetLocked) {
+            this.targetLockRoll();
+        }
     }
     
 }

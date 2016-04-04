@@ -5,10 +5,11 @@ class _SimulationPanel extends Component {
         return {
             'attackVal': '2',
             'evadeVal': '2',
-            'attackFocus': 'false',
-            'evadeFocus': 'false',
+            'attackFocus': false,
+            'evadeFocus': false,
+            'isTargetLocked':false,
             'attackRange': '2',
-            'obstructed': 'false',
+            'obstructed': false,
             'simulations': '1000'
         };
     }
@@ -22,11 +23,15 @@ class _SimulationPanel extends Component {
     }
     
     onAttackFocusChange(event) {
-        this.setState({'attackFocus': event.target.value});
+        this.setState({'attackFocus': event.target.checked});
+    }
+
+    onTargetLockedChange(event) {
+        this.setState({'isTargetLocked': event.target.checked});
     }
     
     onEvadeFocusChange(event) {
-        this.setState({'evadeFocus': event.target.value});
+        this.setState({'evadeFocus': event.target.checked});
     }
     
     onAttackRangeChange(event) {
@@ -34,7 +39,7 @@ class _SimulationPanel extends Component {
     }
     
     onObstructedChange(event) {
-        this.setState({'obstructed': event.target.value});
+        this.setState({'obstructed': event.target.checked});
     }
     
     onSimulationsChange(event) {
@@ -65,9 +70,10 @@ class _SimulationPanel extends Component {
          int simulationNumber = int.parse(this.state['simulations']);
          int range = int.parse(this.state['attackRange']);
          
-         bool attackFocus = this.state['attackFocus'] == 'true';
-         bool evadeFocus = this.state['evadeFocus'] == 'true';
-         bool obstructed = this.state['obstructed'] == 'true';
+         bool attackFocus = this.state['attackFocus'];
+         bool evadeFocus = this.state['evadeFocus'];
+         bool obstructed = this.state['obstructed'];
+         bool isTargetLocked = this.state['isTargetLocked'];
          
          if (range > 2) {
            evadeVal++;
@@ -81,7 +87,7 @@ class _SimulationPanel extends Component {
          
          double totalDamage = 0.0;
          for (var i = 0; i < simulationNumber; i++) {
-             AttackRoll attRoll = new AttackRoll(attackVal, attackFocus);
+             AttackRoll attRoll = new AttackRoll(attackVal, attackFocus, isTargetLocked);
              EvadeRoll evadeRoll = new EvadeRoll(evadeVal, evadeFocus);
                    
              attRoll.roll();
@@ -106,6 +112,10 @@ class _SimulationPanel extends Component {
                  div({'className': 'form-group'}, [
                    label({'className':'cnlabel'}, 'Attacker Focusing:'),
                    input({'className':'cnvalue', 'type':'checkbox', 'value':this.state['attackFocus'],'onChange': this.onAttackFocusChange})
+                   ]),
+                 div({'className': 'form-group'}, [
+                   label({'className':'cnlabel'}, 'Attacker Target Locked:'),
+                   input({'className':'cnvalue', 'type':'checkbox', 'value':this.state['isTargetLocked'],'onChange': this.onTargetLockedChange})
                    ]),
                  div({'className': 'form-group'}, [
                    label({'className':'cnlabel'}, 'Defender Focusing:'),
