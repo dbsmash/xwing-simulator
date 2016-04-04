@@ -1,17 +1,26 @@
 part of xwing;
 
 class _SimulationPanel extends Component {
+    var cachedState = null;
+
+    _SimulationPanel() {
+      loadUrlParams();
+    }
+
     getInitialState() {
-        return {
-            'attackVal': '2',
-            'evadeVal': '2',
-            'attackFocus': false,
-            'evadeFocus': false,
-            'isTargetLocked':false,
-            'attackRange': '2',
-            'obstructed': false,
-            'simulations': '1000'
-        };
+      if (cachedState != null) {
+        return cachedState;
+      }
+      return {
+          'attackVal': '2',
+          'evadeVal': '2',
+          'attackFocus': false,
+          'evadeFocus': false,
+          'isTargetLocked':false,
+          'attackRange': '2',
+          'obstructed': false,
+          'simulations': '1000'
+      };
     }
     
     onAttackValChange(event) {
@@ -47,10 +56,48 @@ class _SimulationPanel extends Component {
     }
     
     onAttackButtonClick(event) {
+        this.getUrlParams();
         this.commenceAttack();
     }
-    
 
+    void getUrlParams() {
+      List<String> gameParams = new List<String>();
+      gameParams.add("${this.state['attackVal']}_");
+      gameParams.add("${this.state['evadeVal']}_");
+      gameParams.add("${this.state['attackFocus']}_");
+      gameParams.add("${this.state['evadeFocus']}_");
+      gameParams.add("${this.state['isTargetLocked']}_");
+      gameParams.add("${this.state['attackRange']}_");
+      gameParams.add("${this.state['obstructed']}_");
+      gameParams.add("${this.state['simulations']}");
+      
+      Uri current = Uri.base;
+      Map<String, String> params = new Map<String, String>.from(current.queryParameters);
+      params['params'] = gameParams.join('');
+      current = current.replace(queryParameters: params);
+      window.history.pushState('', '', current.toString());
+    }
+
+    void loadUrlParams() {
+      String mapParam = Uri.base.queryParameters['params'];
+      if (mapParam == null) {
+        return;
+      }
+
+      List<String> urlState = mapParam.split('_');
+      if (urlState.length == 8) {
+        cachedState = {
+          'attackVal': urlState[0],
+          'evadeVal': urlState[1],
+          'attackFocus': urlState[2] == 'true',
+          'evadeFocus': urlState[3] == 'true',
+          'isTargetLocked':urlState[4] == 'true',
+          'attackRange': urlState[5],
+          'obstructed': urlState[6] == 'true',
+          'simulations': urlState[7]
+        };
+      }
+    }
         
     // scores a given attack, by comparing the strength of the attack versus the strength of the defense
     // returns zero if the attack value didn't exceed the defense value
@@ -111,15 +158,15 @@ class _SimulationPanel extends Component {
                    ]),
                  div({'className': 'form-group'}, [
                    label({'className':'cnlabel'}, 'Attacker Focusing:'),
-                   input({'className':'cnvalue', 'type':'checkbox', 'value':this.state['attackFocus'],'onChange': this.onAttackFocusChange})
+                   input({'className':'cnvalue', 'type':'checkbox', 'checked':this.state['attackFocus'],'onChange': this.onAttackFocusChange})
                    ]),
                  div({'className': 'form-group'}, [
                    label({'className':'cnlabel'}, 'Attacker Target Locked:'),
-                   input({'className':'cnvalue', 'type':'checkbox', 'value':this.state['isTargetLocked'],'onChange': this.onTargetLockedChange})
+                   input({'className':'cnvalue', 'type':'checkbox', 'checked':this.state['isTargetLocked'],'onChange': this.onTargetLockedChange})
                    ]),
                  div({'className': 'form-group'}, [
                    label({'className':'cnlabel'}, 'Defender Focusing:'),
-                   input({'className':'cnvalue', 'type':'checkbox', 'value':this.state['evadeFocus'],'onChange': this.onEvadeFocusChange})
+                   input({'className':'cnvalue', 'type':'checkbox', 'checked':this.state['evadeFocus'],'onChange': this.onEvadeFocusChange})
                    ]),
                  div({'className': 'form-group'}, [
                    label({'className':'cnlabel'}, 'Attack Range:'),
@@ -128,7 +175,7 @@ class _SimulationPanel extends Component {
                    ]),
                  div({'className': 'form-group'}, [
                    label({'className':'cnlabel'}, 'Obstructed:'),
-                   input({'className':'cnvalue', 'type':'checkbox', 'value':this.state['obstructed'],'onChange': this.onObstructedChange})
+                   input({'className':'cnvalue', 'type':'checkbox', 'checked':this.state['obstructed'],'onChange': this.onObstructedChange})
                    ]),
                  div({'className': 'form-group'}, [
                    label({'className':'cnlabel'}, 'Simulation Number::'),
