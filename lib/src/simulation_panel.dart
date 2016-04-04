@@ -160,6 +160,7 @@ class _SimulationPanel extends Component {
         input({
           'className': 'cnvalue',
           'value': this.state['attackVal'],
+          'title': 'The attack value of the attacker (red dice)',
           'onChange': this.onAttackValChange
         })
       ]),
@@ -170,6 +171,7 @@ class _SimulationPanel extends Component {
         input({
           'className': 'cnvalue',
           'value': this.state['evadeVal'],
+          'title': 'The defense value of the defender (green dice)',
           'onChange': this.onEvadeValChange
         })
       ]),
@@ -181,6 +183,7 @@ class _SimulationPanel extends Component {
           'className': 'cnvalue',
           'type': 'checkbox',
           'checked': this.state['attackFocus'],
+          'title': 'Whether or not the attacker is focusing for the attack',
           'onChange': this.onAttackFocusChange
         })
       ]),
@@ -192,6 +195,7 @@ class _SimulationPanel extends Component {
           'className': 'cnvalue',
           'type': 'checkbox',
           'checked': this.state['isTargetLocked'],
+          'title': 'Whether or not the attacker has a target lock for the attack',
           'onChange': this.onTargetLockedChange
         })
       ]),
@@ -203,6 +207,7 @@ class _SimulationPanel extends Component {
           'className': 'cnvalue',
           'type': 'checkbox',
           'checked': this.state['evadeFocus'],
+          'title': 'Whether or not the defender is focusing for the attack',
           'onChange': this.onEvadeFocusChange
         })
       ]),
@@ -217,6 +222,7 @@ class _SimulationPanel extends Component {
           'max': '3',
           'step': '1',
           'value': this.state['attackRange'],
+          'title': 'The range of the attack',
           'onChange': this.onAttackRangeChange
         }),
         label({'className': 'chaser'}, 'range ' + this.state['attackRange'])
@@ -229,6 +235,7 @@ class _SimulationPanel extends Component {
           'className': 'cnvalue',
           'type': 'checkbox',
           'checked': this.state['obstructed'],
+          'title': 'Whether or not the attack is obstructed',
           'onChange': this.onObstructedChange
         })
       ]),
@@ -239,6 +246,7 @@ class _SimulationPanel extends Component {
         input({
           'className': 'cnvalue',
           'value': this.state['simulations'],
+          'title': 'How many times to simulate this attack',
           'onChange': this.onSimulationsChange
         })
       ]),
@@ -248,6 +256,7 @@ class _SimulationPanel extends Component {
         label({'className': 'cnlabel'}, 'Ready: '),
         button({
           'className': 'cnvalue btn btn-primary',
+          'title': 'To start the simulation',
           'onClick': this.onAttackButtonClick
         }, 'Attack!')
       ])
