@@ -10,6 +10,7 @@ The X-Wing damage simulator is a simple Dart-based tool to simulate the average 
 
 ```bash
 git checkout gh-pages
+git pull origin master
 pub get
 pub build
 git add -f build/web && git commit -m "commiting build for gh-pages"
